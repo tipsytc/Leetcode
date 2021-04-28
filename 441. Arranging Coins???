@@ -1,0 +1,66 @@
+# [441. Arranging Coins](https://leetcode.com/problems/arranging-coins/)
+
+## Problem
+
+
+You have  `n`  coins and you want to build a staircase with these coins. The staircase consists of  `k`  rows where the  `i-th`  row has exactly  `i`  coins. The last row of the staircase  **may be** incomplete.
+
+Given the integer  `n`, return  _the number of  **complete rows**  of the staircase you will build_.
+
+#### Example 1:
+
+
+>**Input:** n = 5
+**Output:** 2
+**Explanation:** Because the 3rd row is incomplete, we return 2.
+
+
+#### Example 2:
+
+>**Input:** n = 8
+**Output:** 3
+**Explanation:** Because the 4th row is incomplete, we return 3.
+
+## Solution:
+
+### Exhaustive Search:
+
+Loop through all possible pairs in the list.
+
+**Complexity Analysis:**
+- Time complexity :  $O(n^2)$. For each element, we try to find its complement by looping through the rest of array which takes  $O(n)$ time. Therefore, the time complexity is  $O(n^2)$.
+- Space complexity: $O(1)$.
+```python
+    def arrangeCoins(self, n: int) -> int:
+        i = 1
+        ctr = 0
+        while n >= i:
+            n -= i
+            i += 1
+        return i - 1
+```
+
+### Binary Search:
+While iterating and inserting elements into the hash table, we also look back to check if current element's complement already exists in the table. If it exists, we have found a solution and return immediately.
+
+**Complexity Analysis:**
+- Time complexity :  $O(n)$. We only need to iterate through the list once, and each look up in the dictionary takes $O(1)$.
+- Space complexity :  $O(n)$. Depending on the number of items stored in the hash table, which is at most $n$.
+
+```python
+def twoSum(self, nums, target):
+        d = {}
+        for i, n in enumerate(nums):
+            m = target - n
+            if m in d:
+                return [d[m], i]
+            else:
+                d[n] = i
+```
+
+### Mathematics:
+While iterating and inserting elements into the hash table, we also look back to check if current element's complement already exists in the table. If it exists, we have found a solution and return immediately.
+
+<!--stackedit_data:
+eyJoaXN0b3J5IjpbLTk1NjIzOTI2N119
+-->

@@ -1,0 +1,65 @@
+# [415. Add Strings ???](https://leetcode.com/problems/add-strings/)
+
+## Problem
+
+
+Given two non-negative integers, `num1` and `num2` represented as string, return _the sum of_ `num1`  _and_  `num2`  _as a string_.
+
+**Follow up:** Could you solve it without using any built-in `BigInteger` library or converting the inputs to integer directly?
+
+#### Example 1:
+
+```
+Given nums = [2, 7, 11, 15], target = 9,
+Because nums[0] + nums[1] = 2 + 7 = 9,
+return [0, 1].
+```
+
+#### Example 2:
+
+```
+Given nums = [3,2,4], target = 6
+Because nums[1] + nums[2] = 2 + 4 = 6,
+return [1, 2].
+```
+
+## Solution:
+
+### Brute Force:
+
+Loop through all possible pairs in the list.
+
+**Complexity Analysis:**
+- Time complexity :  $O(n^2)$. For each element, we try to find its complement by looping through the rest of array which takes  $O(n)$ time. Therefore, the time complexity is  $O(n^2)$.
+- Space complexity: $O(1)$.
+```python
+def twoSum(self, nums, target):
+        for i in range(len(nums)):
+	        for j in range(i+1,len(nums)):
+		        if nums[i] + nums[j] == target:
+			        return [i,j]
+```
+
+### One Pass:
+While iterating and inserting elements into the hash table, we also look back to check if current element's complement already exists in the table. If it exists, we have found a solution and return immediately.
+
+**Complexity Analysis:**
+- Time complexity :  $O(n)$. We only need to iterate through the list once, and each look up in the dictionary takes $O(1)$.
+- Space complexity :  $O(n)$. Depending on the number of items stored in the hash table, which is at most $n$.
+
+```python
+def twoSum(self, nums, target):
+        d = {}
+        for i, n in enumerate(nums):
+            m = target - n
+            if m in d:
+                return [d[m], i]
+            else:
+                d[n] = i
+```
+
+
+
+<!--stackedit_data:
+eyJoaXN0b3J5IjpbNTMxNTg2NzQ3XX0=
+-->
