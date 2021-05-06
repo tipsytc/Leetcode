@@ -6,6 +6,24 @@
 Given an unsorted array of integers  `nums`, return  _the length of the longest  **continuous increasing subsequence**  (i.e. subarray)_. The subsequence must be  **strictly**  increasing.
 
 A  **continuous increasing subsequence**  is defined by two indices  `l`  and  `r`  (`l < r`) such that it is  `[nums[l], nums[l + 1], ..., nums[r - 1], nums[r]]`  and for each  `l <= i < r`,  `nums[i] < nums[i + 1]`.
+
+
+
+```python
+class Solution:
+    def findLengthOfLCIS(self, nums: List[int]) -> int:
+        if len(nums) == 0:
+            return 0
+        res, ctr = 0,0
+        for i in range(len(nums)-1):
+            if nums[i+1] > nums[i]:
+                ctr += 1
+                if ctr > res:
+                    res = ctr
+            else:
+                ctr = 0
+        return res+1
+```
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTMwMjUxOTMzXX0=
+eyJoaXN0b3J5IjpbMzIyMDUxLC0zMDI1MTkzM119
 -->
